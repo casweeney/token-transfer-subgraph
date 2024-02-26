@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "W3XToken": {
+      "address": "0x56eB6Eeb0777a2053DDDb6d6fF2b47018b49bb93",
+      "startBlock": 5367421
+    }
+  }
+}
