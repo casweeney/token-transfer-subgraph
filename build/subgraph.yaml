@@ -2,7 +2,7 @@ specVersion: 1.0.0
 indexerHints:
   prune: auto
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: W3XToken
@@ -20,8 +20,8 @@ dataSources:
         - TransferEventCount
       abis:
         - name: W3XToken
-          file: ./abis/W3XToken.json
+          file: W3XToken/abis/W3XToken.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/w-3-x-token.ts
+      file: W3XToken/W3XToken.wasm
