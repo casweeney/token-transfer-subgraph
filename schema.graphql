@@ -1,9 +1,15 @@
 type Transfer @entity(immutable: true) {
-  id: Bytes!
+  id: ID!
   from: Bytes! # address
   to: Bytes! # address
   value: BigInt! # uint256
   blockNumber: BigInt!
+  transferIndex: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+
+type TransferCount @entity {
+  id: ID!
+  value: BigInt! # uint256
 }

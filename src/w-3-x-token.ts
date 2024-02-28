@@ -1,22 +1,24 @@
+import { log } from "@graphprotocol/graph-ts";
+import { Transfer as TransferEvent } from "../generated/W3XToken/W3XToken";
 import {
-  Approval as ApprovalEvent,
-  OwnershipTransferred as OwnershipTransferredEvent,
-  Transfer as TransferEvent
-} from "../generated/W3XToken/W3XToken"
-import { Transfer } from "../generated/schema"
-
+  getTransferCount,
+  increasementTransferCount,
+} from "./utils/TransferCount";
+import { findOrCreateTransfer } from "./utils/Transfer";
 
 export function handleTransfer(event: TransferEvent): void {
-  let entity = new Transfer(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.from = event.params.from
-  entity.to = event.params.to
-  entity.value = event.params.value
+  increasementTransferCount();
+  const transferCount = getTransferCount();
+  log.debug("Transfer Count: {}", [transferCount.value.toString()]);
+  let entity = findOrCreateTransfer(event.transaction.hash.toHex());
+  entity.from = event.params.from;
+  entity.to = event.params.to;
+  entity.value = event.params.value;
+  entity.transferIndex = transferCount.value;
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  entity.blockNumber = event.block.number;
+  entity.blockTimestamp = event.block.timestamp;
+  entity.transactionHash = event.transaction.hash;
 
-  entity.save()
+  entity.save();
 }
