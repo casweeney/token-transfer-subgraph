@@ -13,3 +13,8 @@ type TransferCount @entity {
   id: ID!
   value: BigInt! # uint256
 }
+
+type AddressTransferCount @entity {
+  id: ID! # the owner address
+  value: BigInt! # uint256
+}

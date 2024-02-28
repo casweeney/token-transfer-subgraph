@@ -5,9 +5,13 @@ import {
   increasementTransferCount,
 } from "./utils/TransferCount";
 import { findOrCreateTransfer } from "./utils/Transfer";
+import { increasementAddressTransferCount } from "./utils/AddressTransferCount";
 
 export function handleTransfer(event: TransferEvent): void {
   increasementTransferCount();
+  // increasementAddressTransferCount(event.params.to.toHexString());
+  increasementAddressTransferCount(event.params.from.toHexString());
+
   const transferCount = getTransferCount();
   log.debug("Transfer Count: {}", [transferCount.value.toString()]);
   let entity = findOrCreateTransfer(event.transaction.hash.toHex());
