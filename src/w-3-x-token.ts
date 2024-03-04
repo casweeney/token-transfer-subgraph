@@ -7,10 +7,12 @@ import {
 import { findOrCreateTransfer } from "./utils/Transfer";
 import { incrementAddressTransferCount } from "./utils/AddressTransferCount";
 import { TransferTotal } from "../generated/schema"
+import { updateTransferTotal } from "./utils/TransferTotal";
 
 export function handleTransfer(event: TransferEvent): void {
   incrementTransferCount();
   incrementAddressTransferCount(event.params.from.toHexString());
+  updateTransferTotal(event.params.value);
 
   const transferCount = getTransferCount();
 
@@ -29,14 +31,4 @@ export function handleTransfer(event: TransferEvent): void {
   entity.transactionHash = event.transaction.hash;
 
   entity.save();
-
-  let transferTotal = TransferTotal.load('TOTAL')
-
-  if (!transferTotal) {
-    transferTotal = new TransferTotal('TOTAL')
-    transferTotal.totalAmount = BigInt.fromString("0")
-  }
-
-  transferTotal.totalAmount = transferTotal.totalAmount.plus(event.params.value)
-  transferTotal.save()
 }

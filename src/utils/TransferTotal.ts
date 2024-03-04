@@ -6,6 +6,7 @@ const BIGINT_ZERO = BigInt.fromString("0");
 
 export function getTransferTotal(): TransferTotal {
   let entity = TransferTotal.load(ID);
+
   if (entity === null) {
     entity = new TransferTotal(ID);
     entity.totalAmount = BIGINT_ZERO;
@@ -14,10 +15,10 @@ export function getTransferTotal(): TransferTotal {
   return entity;
 }
 
-export function updateTransferTotal(): TransferTotal {
+export function updateTransferTotal(eventValue: BigInt): TransferTotal {
   let entity = getTransferTotal();
   const oldTotalAmount = entity.totalAmount;
-  entity.totalAmount = oldTotalAmount.plus(entity.totalAmount);
+  entity.totalAmount = oldTotalAmount.plus(eventValue);
   entity.save();
   return entity;
 }
