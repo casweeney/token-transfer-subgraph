@@ -6,13 +6,15 @@ import {
 } from "./utils/TransferCount";
 import { findOrCreateTransfer } from "./utils/Transfer";
 import { incrementAddressTransferCount } from "./utils/AddressTransferCount";
-import { TransferTotal } from "../generated/schema"
 import { updateTransferTotal } from "./utils/TransferTotal";
+import { updateTransferPairTotal } from "./utils/TransferPairTotal";
 
 export function handleTransfer(event: TransferEvent): void {
   incrementTransferCount();
   incrementAddressTransferCount(event.params.from.toHexString());
-  updateTransferTotal(event.params.value);
+  updateTransferTotal( event.params.value);
+
+  updateTransferPairTotal(event.params.from,event.params.to, event.params.value);
 
   const transferCount = getTransferCount();
 
