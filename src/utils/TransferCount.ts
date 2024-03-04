@@ -1,4 +1,4 @@
-import { BigInt, Bytes } from "@graphprotocol/graph-ts";
+import { BigInt } from "@graphprotocol/graph-ts";
 import { TransferCount } from "../../generated/schema";
 
 const ID = "1";
@@ -15,7 +15,7 @@ export function getTransferCount(): TransferCount {
   return entity;
 }
 
-export function increasementTransferCount(): TransferCount {
+export function incrementTransferCount(): TransferCount {
   let entity = getTransferCount();
   const oldValue = entity.value;
   entity.value = oldValue.plus(BIGINT_ONE);

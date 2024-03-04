@@ -18,3 +18,10 @@ type AddressTransferCount @entity {
   id: ID! # the owner address
   value: BigInt! # uint256
 }
+
+type TotalTransferredAmount @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! #uint256
+}
