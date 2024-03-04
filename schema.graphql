@@ -19,9 +19,7 @@ type AddressTransferCount @entity {
   value: BigInt! # uint256
 }
 
-type TotalTransferredAmount @entity {
+type TransferTotal @entity {
   id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  value: BigInt! #uint256
+  totalAmount: BigInt! #uint256
 }
