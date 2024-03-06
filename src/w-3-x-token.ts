@@ -7,12 +7,14 @@ import {
 import { findOrCreateTransfer } from "./utils/Transfer";
 import { incrementAddressTransferCount } from "./utils/AddressTransferCount";
 import { updateTransferTotal } from "./utils/TransferTotal";
-import { updateTransferPairTotal } from "./utils/TransferPairTotal";
+import { updateTransferPairTotal } from "./utils/TransferPairTotal"
+import { updateInTransferTotal } from "./utils/InTransferTotal";;
 
 export function handleTransfer(event: TransferEvent): void {
   incrementTransferCount();
   incrementAddressTransferCount(event.params.from.toHexString());
   updateTransferTotal( event.params.value);
+  updateInTransferTotal(event.params.to.toHexString(), event.params.value)
 
   updateTransferPairTotal(event.params.from,event.params.to, event.params.value);
 

@@ -30,3 +30,8 @@ type TransferPairTotal @entity {
   to: Bytes! # address
   totalAmount: BigInt! # Total transferred amount for this from->to pair
 }
+
+type InTransferTotal @entity {
+  id: ID! # to address
+  totalAmountTransferredIn: BigInt! # Total amount transferred  into the to address
+}
